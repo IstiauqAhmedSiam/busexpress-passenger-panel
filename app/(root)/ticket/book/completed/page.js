@@ -4,17 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 const BookingSuccessPage = () => {
     const router = useRouter();
-    const searchParams = useSearchParams();
     const [ticketId, setTicketId] = useState('');
 
     useEffect(() => {
-        const id = searchParams.get('ticketId');
+        const id = "asdfsdfsd";
         if (id) {
             setTicketId(id);
         } else {
             router.push('/');
         }
-    }, [searchParams, router]);
+    }, [router]);
 
     const handleViewTicket = () => {
         if (ticketId) {
