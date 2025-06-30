@@ -44,7 +44,7 @@ const Seat = ({ id, status, onClick }) => {
 
 export default function SeatSelection(){
     const router = useRouter();
-    const [tripID, setTripID] = useState(new URL(location.href).searchParams.get('tripID'));
+    const [tripID, setTripID] = useState("");
     const { seats, setSeats, setSeatPrice, selectedSeats, totalPrice, toggleSeatStatus, startReservationTimer, setTripDetails, tripDetails} = useTicketProvider();
 
     const handleConfirm = () => {
@@ -68,16 +68,18 @@ export default function SeatSelection(){
     }
 
     useEffect(()=>{
+        let url = window.location.href;
+
         async function fetchTripDetails(){
             let tripDetails = await fetch(process.env.NEXT_PUBLIC_API_URL + "/passenger/tripDetails.php", {
                                             headers: {
                                                 "Content-Type" : "application/x-www-form-urlencoded"
                                             },
                                             method: "POST",
-                                            body: `tripID=${new URL(location.href).searchParams.get('tripID')}`
+                                            body: `tripID=${url.searchParams.get('tripID')}`
                                         });
                 tripDetails = await tripDetails.json();
-                tripDetails.tripID = new URL(location.href).searchParams.get('tripID');
+                tripDetails.tripID = url.searchParams.get('tripID');
 
 
             let seatsData = [
