@@ -68,18 +68,16 @@ export default function SeatSelection(){
     }
 
     useEffect(()=>{
-        let url = window.location.href;
-
         async function fetchTripDetails(){
             let tripDetails = await fetch(process.env.NEXT_PUBLIC_API_URL + "/passenger/tripDetails.php", {
                                             headers: {
                                                 "Content-Type" : "application/x-www-form-urlencoded"
                                             },
                                             method: "POST",
-                                            body: `tripID=${url.searchParams.get('tripID')}`
+                                            body: `tripID=18`
                                         });
                 tripDetails = await tripDetails.json();
-                tripDetails.tripID = url.searchParams.get('tripID');
+                tripDetails.tripID = 18;
 
 
             let seatsData = [
